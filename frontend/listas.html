@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Áurea Den - Listas</title>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🦊 Áurea Den</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="listas.html" class="link-ativo">Listas</a></li>
+        <li><a href="lancamentos.html">Lançamentos</a></li>
+        <li><a href="generos.html">Gênero</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+      </ul>
+    </nav>
+    <div class="acoes-header">
+      <input type="text" id="campo-busca" placeholder="Buscar filmes..." />
+      <button id="botao-conta">👤</button>
+    </div>
+  </header>
+
+  <!-- modal que aparece quando clica no ícone de usuário -->
+  <div id="modal-auth" class="escondido">
+    <div class="caixa-modal">
+      <button id="fechar-modal">×</button>
+
+      <div id="area-login">
+        <h2>Entrar</h2>
+        <form id="form-login">
+          <input type="text" id="login-usuario" placeholder="Usuário" required />
+          <input type="password" id="login-senha" placeholder="Senha" required />
+          <button type="submit">Entrar</button>
+        </form>
+        <p>Não tem conta? <a href="#" id="ir-para-cadastro">Cadastre-se</a></p>
+        <p id="login-erro" class="erro"></p>
+      </div>
+
+      <div id="area-cadastro" class="escondido">
+        <h2>Criar conta</h2>
+        <form id="form-cadastro">
+          <input type="text" id="cadastro-usuario" placeholder="Usuário" required />
+          <input type="password" id="cadastro-senha" placeholder="Senha" required />
+          <button type="submit">Cadastrar</button>
+        </form>
+        <p>Já tem conta? <a href="#" id="ir-para-login">Entrar</a></p>
+        <p id="cadastro-erro" class="erro"></p>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section id="secao-listas">
+      <div class="cabecalho-secao">
+        <h2>Todos os filmes</h2>
+      </div>
+
+      <!-- aqui mostro todo mundo que tá cadastrado, sem cortar em "destaques" como na home -->
+      <div id="grade-filmes"></div>
+    </section>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/autenticacao.js"></script>
+  <script src="js/renderizar-filmes.js"></script>
+  <script src="js/listas.js"></script>
+</body>
+</html>
