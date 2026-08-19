@@ -2,42 +2,40 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
-from app.core.seguranca import criar_token, criptografar_senha, senha_esta_correta
-from app.database import pegar_banco
-from app.models.usuario import Usuario
-from app.schemas.usuario import Token, UsuarioCriar
+from app.core.security import check_password, create_token, hash_password
+from app.database import get_db
+from app.models.user import User
+from app.schemas.user import Token, UserCreate
 
 router = APIRouter(prefix="/auth", tags=["Autenticação"])
 
 
-@router.post("/registrar", response_model=Token)
-def registrar(dados: UsuarioCriar, banco: Session = Depends(pegar_banco)):
-    usuario_existente = banco.query(Usuario).filter(
-        Usuario.nome_usuario == dados.nome_usuario
-    ).first()
+@router.post("/register", response_model=Token)
+def register(data: UserCreate, db: Session = Depends(get_db)):
+    existing_user = db.query(User).filter(User.username == data.username).first()
 
-    if usuario_existente:
+    if existing_user:
         raise HTTPException(status_code=400, detail="Já tem um usuário com esse nome")
 
-    novo_usuario = Usuario(
-        nome_usuario=dados.nome_usuario,
-        senha_criptografada=criptografar_senha(dados.senha),
+    new_user = User(
+        username=data.username,
+        hashed_password=hash_password(data.password),
     )
-    banco.add(novo_usuario)
-    banco.commit()
-    banco.refresh(novo_usuario)
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
 
     # já devolve o token pra a pessoa entrar logada logo depois de criar a conta
-    token = criar_token({"sub": novo_usuario.nome_usuario})
+    token = create_token({"sub": new_user.username})
     return {"access_token": token, "token_type": "bearer"}
 
 
 @router.post("/login", response_model=Token)
-def login(form: OAuth2PasswordRequestForm = Depends(), banco: Session = Depends(pegar_banco)):
-    usuario = banco.query(Usuario).filter(Usuario.nome_usuario == form.username).first()
+def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.username == form.username).first()
 
-    if not usuario or not senha_esta_correta(form.password, usuario.senha_criptografada):
+    if not user or not check_password(form.password, user.hashed_password):
         raise HTTPException(status_code=401, detail="Usuário ou senha errados")
 
-    token = criar_token({"sub": usuario.nome_usuario})
+    token = create_token({"sub": user.username})
     return {"access_token": token, "token_type": "bearer"}
