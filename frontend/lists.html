@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Áurea Den - Sobre</title>
+  <title>Áurea Den - Listas</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -12,10 +13,10 @@
     <nav>
       <ul>
         <li><a href="index.html">Início</a></li>
-        <li><a href="listas.html">Listas</a></li>
-        <li><a href="lancamentos.html">Lançamentos</a></li>
-        <li><a href="generos.html">Gênero</a></li>
-        <li><a href="sobre.html" class="link-ativo">Sobre</a></li>
+        <li><a href="lists.html" class="link-ativo">Listas</a></li>
+        <li><a href="releases.html">Lançamentos</a></li>
+        <li><a href="genres.html">Gênero</a></li>
+        <li><a href="about.html">Sobre</a></li>
       </ul>
     </nav>
     <div class="acoes-header">
@@ -24,7 +25,7 @@
     </div>
   </header>
 
-  <!-- modal que aparece quando clica no ícone de usuário -->
+  <!-- modal de login/cadastro -->
   <div id="modal-auth" class="escondido">
     <div class="caixa-modal">
       <button id="fechar-modal">×</button>
@@ -53,22 +54,32 @@
     </div>
   </div>
 
+  <!-- modal que abre quando clica em um filme, pra ver os detalhes -->
+  <div id="modal-detalhes" class="escondido">
+    <div class="caixa-modal caixa-modal-filme">
+      <button id="fechar-modal-detalhes">×</button>
+      <img id="detalhes-capa" src="" alt="" />
+      <div class="texto-detalhes">
+        <h2 id="detalhes-titulo"></h2>
+        <p id="detalhes-nota"></p>
+        <p id="detalhes-descricao"></p>
+      </div>
+    </div>
+
   <main>
-    <section id="secao-sobre">
-      <h2>Sobre o Áurea Den</h2>
-      <p>
-        O Áurea Den é um catálogo de filmes feito como trabalho pra ETEC.
-        Aqui dá pra ver os filmes cadastrados, e quem cria uma conta e
-        loga consegue cadastrar filme novo (título, capa, descrição e nota).
-      </p>
-      <p>
-        Feito com FastAPI + PostgreSQL no back-end e HTML/JS puro no front,
-        sem framework nenhum no front pra treinar o básico mesmo.
-      </p>
+    <section id="secao-listas">
+      <div class="cabecalho-secao">
+        <h2>Todos os filmes</h2>
+      </div>
+
+      <!-- aqui mostro todo mundo que tá cadastrado, sem cortar em "destaques" como na home -->
+      <div id="grade-filmes"></div>
     </section>
   </main>
 
   <script src="js/api.js"></script>
-  <script src="js/autenticacao.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/render-movies.js"></script>
+  <script src="js/lists.js"></script>
 </body>
 </html>

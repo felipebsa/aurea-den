@@ -4,7 +4,7 @@ const URL_API = "http://127.0.0.1:8000";
 
 // pega a lista de filmes lá do banco
 async function buscarFilmes() {
-  const resposta = await fetch(`${URL_API}/filmes/`);
+  const resposta = await fetch(`${URL_API}/movies/`);
   if (!resposta.ok) {
     throw new Error("Deu ruim pra buscar os filmes");
   }
@@ -15,7 +15,7 @@ async function buscarFilmes() {
 async function cadastrarFilme(filme) {
   const token = localStorage.getItem("token_aurea_den");
 
-  const resposta = await fetch(`${URL_API}/filmes/`, {
+  const resposta = await fetch(`${URL_API}/movies/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -34,10 +34,10 @@ async function cadastrarFilme(filme) {
 
 // cria a conta do usuário e já devolve o token de login
 async function registrarUsuario(nomeUsuario, senha) {
-  const resposta = await fetch(`${URL_API}/auth/registrar`, {
+  const resposta = await fetch(`${URL_API}/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nome_usuario: nomeUsuario, senha: senha }),
+    body: JSON.stringify({ username: nomeUsuario, password: senha }),
   });
 
   if (!resposta.ok) {

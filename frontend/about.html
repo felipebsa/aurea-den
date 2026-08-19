@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Áurea Den - Gênero</title>
+  <title>Áurea Den - Sobre</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -12,10 +13,10 @@
     <nav>
       <ul>
         <li><a href="index.html">Início</a></li>
-        <li><a href="listas.html">Listas</a></li>
-        <li><a href="lancamentos.html">Lançamentos</a></li>
-        <li><a href="generos.html" class="link-ativo">Gênero</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="lists.html">Listas</a></li>
+        <li><a href="releases.html">Lançamentos</a></li>
+        <li><a href="genres.html">Gênero</a></li>
+        <li><a href="about.html" class="link-ativo">Sobre</a></li>
       </ul>
     </nav>
     <div class="acoes-header">
@@ -24,7 +25,7 @@
     </div>
   </header>
 
-  <!-- modal que aparece quando clica no ícone de usuário -->
+  <!-- modal de login/cadastro -->
   <div id="modal-auth" class="escondido">
     <div class="caixa-modal">
       <button id="fechar-modal">×</button>
@@ -53,31 +54,34 @@
     </div>
   </div>
 
+  <!-- modal que abre quando clica em um filme, pra ver os detalhes -->
+  <div id="modal-detalhes" class="escondido">
+    <div class="caixa-modal caixa-modal-filme">
+      <button id="fechar-modal-detalhes">×</button>
+      <img id="detalhes-capa" src="" alt="" />
+      <div class="texto-detalhes">
+        <h2 id="detalhes-titulo"></h2>
+        <p id="detalhes-nota"></p>
+        <p id="detalhes-descricao"></p>
+      </div>
+    </div>
+
   <main>
-    <section id="secao-generos">
-      <div class="cabecalho-secao">
-        <h2>Filtrar por gênero</h2>
-      </div>
-
-      <!--
-        mesma coisa aqui: o model Filme ainda não tem campo de gênero.
-        deixei os botões de filtro só de exemplo (não fazem nada ainda),
-        pra quando eu adicionar esse campo no banco fica fácil de ligar.
-      -->
-      <div id="filtros-genero">
-        <button class="botao-genero" data-genero="acao">Ação</button>
-        <button class="botao-genero" data-genero="drama">Drama</button>
-        <button class="botao-genero" data-genero="ficcao">Ficção</button>
-        <button class="botao-genero" data-genero="terror">Terror</button>
-      </div>
-
-      <div id="grade-filmes"></div>
+    <section id="secao-sobre">
+      <h2>Sobre o Áurea Den</h2>
+      <p>
+        O Áurea Den é um catálogo de filmes feito como trabalho pra ETEC.
+        Aqui dá pra ver os filmes cadastrados, e quem cria uma conta e
+        loga consegue cadastrar filme novo (título, capa, descrição e nota).
+      </p>
+      <p>
+        Feito com FastAPI + PostgreSQL no back-end e HTML/JS puro no front,
+        sem framework nenhum no front pra treinar o básico mesmo.
+      </p>
     </section>
   </main>
 
   <script src="js/api.js"></script>
-  <script src="js/autenticacao.js"></script>
-  <script src="js/renderizar-filmes.js"></script>
-  <script src="js/generos.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Áurea Den - Lançamentos</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -12,10 +13,10 @@
     <nav>
       <ul>
         <li><a href="index.html">Início</a></li>
-        <li><a href="listas.html">Listas</a></li>
-        <li><a href="lancamentos.html" class="link-ativo">Lançamentos</a></li>
-        <li><a href="generos.html">Gênero</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="lists.html">Listas</a></li>
+        <li><a href="releases.html" class="link-ativo">Lançamentos</a></li>
+        <li><a href="genres.html">Gênero</a></li>
+        <li><a href="about.html">Sobre</a></li>
       </ul>
     </nav>
     <div class="acoes-header">
@@ -24,7 +25,7 @@
     </div>
   </header>
 
-  <!-- modal que aparece quando clica no ícone de usuário -->
+  <!-- modal de login/cadastro -->
   <div id="modal-auth" class="escondido">
     <div class="caixa-modal">
       <button id="fechar-modal">×</button>
@@ -53,6 +54,18 @@
     </div>
   </div>
 
+  <!-- modal que abre quando clica em um filme, pra ver os detalhes -->
+  <div id="modal-detalhes" class="escondido">
+    <div class="caixa-modal caixa-modal-filme">
+      <button id="fechar-modal-detalhes">×</button>
+      <img id="detalhes-capa" src="" alt="" />
+      <div class="texto-detalhes">
+        <h2 id="detalhes-titulo"></h2>
+        <p id="detalhes-nota"></p>
+        <p id="detalhes-descricao"></p>
+      </div>
+    </div>
+
   <main>
     <section id="secao-lancamentos">
       <div class="cabecalho-secao">
@@ -63,15 +76,15 @@
         obs: por enquanto o banco não tem um campo de "data de lançamento",
         então essa página só mostra os filmes cadastrados por ordem de id
         (os mais novos ficam por último). dava pra melhorar isso depois
-        adicionando uma coluna de data no model Filme.
+        adicionando uma coluna de data no model Movie.
       -->
       <div id="grade-filmes"></div>
     </section>
   </main>
 
   <script src="js/api.js"></script>
-  <script src="js/autenticacao.js"></script>
-  <script src="js/renderizar-filmes.js"></script>
-  <script src="js/lancamentos.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/render-movies.js"></script>
+  <script src="js/releases.js"></script>
 </body>
 </html>

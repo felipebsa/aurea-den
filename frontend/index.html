@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Áurea Den</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -12,19 +13,20 @@
     <nav>
       <ul>
         <li><a href="index.html" class="link-ativo">Início</a></li>
-        <li><a href="listas.html">Listas</a></li>
-        <li><a href="lancamentos.html">Lançamentos</a></li>
-        <li><a href="generos.html">Gênero</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="lists.html">Listas</a></li>
+        <li><a href="releases.html">Lançamentos</a></li>
+        <li><a href="genres.html">Gênero</a></li>
+        <li><a href="about.html">Sobre</a></li>
       </ul>
     </nav>
     <div class="acoes-header">
       <input type="text" id="campo-busca" placeholder="Buscar filmes..." />
+      <button id="botao-add-filme" class="escondido" title="Cadastrar filme">+</button>
       <button id="botao-conta">👤</button>
     </div>
   </header>
 
-  <!-- modal que aparece quando clica no ícone de usuário -->
+  <!-- modal de login/cadastro -->
   <div id="modal-auth" class="escondido">
     <div class="caixa-modal">
       <button id="fechar-modal">×</button>
@@ -53,6 +55,35 @@
     </div>
   </div>
 
+  <!-- modal que abre quando clica no "+" (só aparece logado) pra cadastrar filme -->
+  <div id="modal-add-filme" class="escondido">
+    <div class="caixa-modal">
+      <button id="fechar-modal-add">×</button>
+      <h2>Cadastrar filme</h2>
+      <form id="form-filme">
+        <input type="text" id="filme-titulo" placeholder="Título" required />
+        <input type="url" id="filme-capa" placeholder="URL da capa" required />
+        <textarea id="filme-descricao" placeholder="Descrição" required></textarea>
+        <input type="number" id="filme-nota" placeholder="Nota (0 a 10)" min="0" max="10" step="0.1" required />
+        <button type="submit">Adicionar</button>
+      </form>
+      <p id="form-filme-erro" class="erro"></p>
+    </div>
+  </div>
+
+  <!-- modal que abre quando clica em um filme, pra ver os detalhes -->
+  <div id="modal-detalhes" class="escondido">
+    <div class="caixa-modal caixa-modal-filme">
+      <button id="fechar-modal-detalhes">×</button>
+      <img id="detalhes-capa" src="" alt="" />
+      <div class="texto-detalhes">
+        <h2 id="detalhes-titulo"></h2>
+        <p id="detalhes-nota"></p>
+        <p id="detalhes-descricao"></p>
+      </div>
+    </div>
+  </div>
+
   <!-- banner grande com o filme em destaque -->
   <section id="banner-destaque">
     <button id="banner-anterior" class="seta-banner">‹</button>
@@ -72,29 +103,16 @@
     <section id="secao-filmes">
       <div class="cabecalho-secao">
         <h2>Filmes</h2>
-        <a href="listas.html">Ver todos →</a>
+        <a href="lists.html">Ver todos →</a>
       </div>
 
       <div id="grade-filmes"></div>
     </section>
-
-    <!-- só aparece pra quem tá logado -->
-    <section id="secao-add-filme" class="escondido">
-      <h2>Cadastrar filme novo</h2>
-      <form id="form-filme">
-        <input type="text" id="filme-titulo" placeholder="Título" required />
-        <input type="url" id="filme-capa" placeholder="URL da capa" required />
-        <textarea id="filme-descricao" placeholder="Descrição" required></textarea>
-        <input type="number" id="filme-nota" placeholder="Nota (0 a 10)" min="0" max="10" step="0.1" required />
-        <button type="submit">Adicionar</button>
-      </form>
-      <p id="form-filme-erro" class="erro"></p>
-    </section>
   </main>
 
   <script src="js/api.js"></script>
-  <script src="js/autenticacao.js"></script>
-  <script src="js/renderizar-filmes.js"></script>
-  <script src="js/inicio.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/render-movies.js"></script>
+  <script src="js/home.js"></script>
 </body>
 </html>

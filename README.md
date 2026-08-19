@@ -5,7 +5,7 @@ Site de catálogo de filmes feito pra ETEC.
 ## Estrutura
 
 - `backend/` — API em FastAPI com autenticação JWT (PostgreSQL)
-- `frontend/` — site multi-page em HTML + JS puro (CSS ainda vou fazer)
+- `frontend/` — site multi-page em HTML + JS puro + CSS
 
 ## Rodando o backend local
 
@@ -26,8 +26,9 @@ subir o backend no Railway, troca essa URL lá.
 
 ## Deploy
 
-- **Backend → Railway**: sobe a pasta `backend/`, adiciona um serviço PostgreSQL
-  no mesmo projeto (o Railway seta a `DATABASE_URL` sozinho) e define a variável
-  `CHAVE_SECRETA`. O `Procfile` já diz pra ele como rodar.
-- **Frontend → Netlify**: sobe a pasta `frontend/` (o `netlify.toml` já tá configurado
-  pra publicar ela como site estático).
+Feito direto pela interface do Railway (backend + banco Postgres) e do Netlify
+(frontend), ligando cada plataforma no repositório do GitHub - sem arquivo de
+configuração extra no projeto.
+
+Não esquece de definir a variável `SECRET_KEY` no Railway (senão ele usa o
+valor padrão que só serve pra testar local).
