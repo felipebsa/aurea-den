@@ -51,6 +51,17 @@ function abrirDetalhesFilme(filme) {
   document.getElementById("detalhes-nota").textContent = `⭐ ${filme.rating}`;
   document.getElementById("detalhes-descricao").textContent = filme.description;
 
+  // o banner é opcional, só mostra a imagem se o filme tiver um cadastrado
+  const banner = document.getElementById("detalhes-banner");
+  if (banner) {
+    if (filme.banner_url) {
+      banner.src = filme.banner_url;
+      banner.classList.remove("escondido");
+    } else {
+      banner.classList.add("escondido");
+    }
+  }
+
   modal.classList.remove("escondido");
 }
 

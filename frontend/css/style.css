@@ -394,7 +394,8 @@ main {
 
 #modal-auth,
 #modal-add-filme,
-#modal-detalhes {
+#modal-detalhes,
+#modal-filme-dev {
   position: fixed;
   inset: 0;
   background: rgba(8, 3, 16, 0.75);
@@ -444,10 +445,27 @@ main {
   resize: vertical;
 }
 
+.caixa-modal select {
+  background: var(--bg-painel-claro);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 11px 14px;
+  color: var(--texto);
+  font-family: var(--fonte-corpo);
+  font-size: 14px;
+  width: 100%;
+}
+
 .caixa-modal input:focus,
-.caixa-modal textarea:focus {
+.caixa-modal textarea:focus,
+.caixa-modal select:focus {
   outline: none;
   border-color: var(--dourado);
+}
+
+/* o modal de filme do Dev Tools tem mais campo, fica melhor um pouco mais largo */
+.caixa-modal-larga {
+  max-width: 460px;
 }
 
 .caixa-modal button[type="submit"] {
@@ -484,7 +502,8 @@ main {
 
 #fechar-modal,
 #fechar-modal-add,
-#fechar-modal-detalhes {
+#fechar-modal-detalhes,
+#fechar-modal-filme-dev {
   position: absolute;
   top: 14px;
   right: 16px;
@@ -498,7 +517,8 @@ main {
 
 #fechar-modal:hover,
 #fechar-modal-add:hover,
-#fechar-modal-detalhes:hover {
+#fechar-modal-detalhes:hover,
+#fechar-modal-filme-dev:hover {
   color: var(--dourado);
 }
 
@@ -540,4 +560,110 @@ main {
   .caixa-modal-filme img {
     width: 100%;
   }
+}
+
+/* banner opcional dentro do modal de detalhes, só aparece se o filme tiver um */
+#detalhes-banner {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  object-fit: cover;
+  max-height: 160px;
+}
+
+/* ---------- Dev Tools (área exclusiva de ADM) ---------- */
+
+.botao-adicionar-dev {
+  background: var(--dourado);
+  color: #2b1600;
+  border: none;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.botao-adicionar-dev:hover {
+  background: var(--dourado-claro);
+}
+
+#lista-dev-filmes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.linha-filme-dev {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg-painel);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 10px 16px;
+  transition: border-color 0.15s ease;
+}
+
+.linha-filme-dev:hover {
+  border-color: var(--dourado);
+}
+
+.linha-filme-dev img {
+  width: 46px;
+  height: 68px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.info-linha-dev {
+  flex: 1;
+  min-width: 0;
+}
+
+.info-linha-dev p {
+  margin: 0;
+}
+
+.titulo-linha-dev {
+  font-weight: 600;
+  color: var(--texto);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nota-linha-dev {
+  font-size: 13px;
+  color: var(--dourado);
+}
+
+.acoes-linha-dev {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.acoes-linha-dev button {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--borda);
+  background: var(--bg-painel-claro);
+  color: var(--texto);
+  cursor: pointer;
+  font-size: 14px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.acoes-linha-dev button:hover {
+  border-color: var(--dourado);
+  color: var(--dourado);
+}
+
+.botao-excluir-dev:hover {
+  border-color: #ff8080 !important;
+  color: #ff8080 !important;
 }

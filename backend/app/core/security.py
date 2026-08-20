@@ -9,7 +9,7 @@ from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.models.user import User
+from app.models.user import User, UserRole
 
 load_dotenv()
 
@@ -62,3 +62,14 @@ def get_current_user(
         raise login_error
 
     return user
+
+
+def require_admin(current_user: User = Depends(get_current_user)) -> User:
+    # usa isso no lugar do get_current_user nas rotas que só ADM pode acessar
+    # (criar/editar/apagar filme, por exemplo)
+    if current_user.role != UserRole.ADM:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Só usuário ADM pode fazer isso",
+        )
+    return current_user

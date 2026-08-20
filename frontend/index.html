@@ -21,7 +21,6 @@
     </nav>
     <div class="acoes-header">
       <input type="text" id="campo-busca" placeholder="Buscar filmes..." />
-      <button id="botao-add-filme" class="escondido" title="Cadastrar filme">+</button>
       <button id="botao-conta">👤</button>
     </div>
   </header>
@@ -47,27 +46,15 @@
         <form id="form-cadastro">
           <input type="text" id="cadastro-usuario" placeholder="Usuário" required />
           <input type="password" id="cadastro-senha" placeholder="Senha" required />
+          <select id="cadastro-role">
+            <option value="CLIENT" selected>Cliente</option>
+            <option value="ADM">Administrador</option>
+          </select>
           <button type="submit">Cadastrar</button>
         </form>
         <p>Já tem conta? <a href="#" id="ir-para-login">Entrar</a></p>
         <p id="cadastro-erro" class="erro"></p>
       </div>
-    </div>
-  </div>
-
-  <!-- modal que abre quando clica no "+" (só aparece logado) pra cadastrar filme -->
-  <div id="modal-add-filme" class="escondido">
-    <div class="caixa-modal">
-      <button id="fechar-modal-add">×</button>
-      <h2>Cadastrar filme</h2>
-      <form id="form-filme">
-        <input type="text" id="filme-titulo" placeholder="Título" required />
-        <input type="url" id="filme-capa" placeholder="URL da capa" required />
-        <textarea id="filme-descricao" placeholder="Descrição" required></textarea>
-        <input type="number" id="filme-nota" placeholder="Nota (0 a 10)" min="0" max="10" step="0.1" required />
-        <button type="submit">Adicionar</button>
-      </form>
-      <p id="form-filme-erro" class="erro"></p>
     </div>
   </div>
 
@@ -77,6 +64,7 @@
       <button id="fechar-modal-detalhes">×</button>
       <img id="detalhes-capa" src="" alt="" />
       <div class="texto-detalhes">
+        <img id="detalhes-banner" class="escondido" src="" alt="Banner do filme" />
         <h2 id="detalhes-titulo"></h2>
         <p id="detalhes-nota"></p>
         <p id="detalhes-descricao"></p>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Áurea Den - Sobre</title>
+  <title>Áurea Den - Dev Tools</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -16,16 +16,16 @@
         <li><a href="lists.html">Listas</a></li>
         <li><a href="releases.html">Lançamentos</a></li>
         <li><a href="genres.html">Gênero</a></li>
-        <li><a href="about.html" class="link-ativo">Sobre</a></li>
+        <li><a href="about.html">Sobre</a></li>
+        <!-- o link "Dev Tools" com destaque ativo é injetado pelo js/auth.js -->
       </ul>
     </nav>
     <div class="acoes-header">
-      <input type="text" id="campo-busca" placeholder="Buscar filmes..." />
       <button id="botao-conta">👤</button>
     </div>
   </header>
 
-  <!-- modal de login/cadastro -->
+  <!-- modal de login/cadastro (fica em toda página, por padrão do site) -->
   <div id="modal-auth" class="escondido">
     <div class="caixa-modal">
       <button id="fechar-modal">×</button>
@@ -58,36 +58,37 @@
     </div>
   </div>
 
-  <!-- modal que abre quando clica em um filme, pra ver os detalhes -->
-  <div id="modal-detalhes" class="escondido">
-    <div class="caixa-modal caixa-modal-filme">
-      <button id="fechar-modal-detalhes">×</button>
-      <img id="detalhes-capa" src="" alt="" />
-      <div class="texto-detalhes">
-        <img id="detalhes-banner" class="escondido" src="" alt="Banner do filme" />
-        <h2 id="detalhes-titulo"></h2>
-        <p id="detalhes-nota"></p>
-        <p id="detalhes-descricao"></p>
-      </div>
+  <!-- modal usado tanto pra CRIAR quanto pra EDITAR filme (o título e o botão mudam via JS) -->
+  <div id="modal-filme-dev" class="escondido">
+    <div class="caixa-modal caixa-modal-larga">
+      <button id="fechar-modal-filme-dev">×</button>
+      <h2 id="titulo-modal-filme-dev">Cadastrar filme</h2>
+      <form id="form-filme-dev">
+        <input type="hidden" id="filme-dev-id" />
+        <input type="text" id="filme-dev-titulo" placeholder="Título" required />
+        <input type="url" id="filme-dev-capa" placeholder="URL da capa" required />
+        <input type="url" id="filme-dev-banner" placeholder="URL do banner (opcional)" />
+        <textarea id="filme-dev-descricao" placeholder="Descrição" required></textarea>
+        <input type="number" id="filme-dev-nota" placeholder="Nota (0 a 10)" min="0" max="10" step="0.1" required />
+        <button type="submit" id="botao-salvar-filme-dev">Adicionar</button>
+      </form>
+      <p id="form-filme-dev-erro" class="erro"></p>
     </div>
   </div>
 
   <main>
-    <section id="secao-sobre">
-      <h2>Sobre o Áurea Den</h2>
-      <p>
-        O Áurea Den é um catálogo de filmes feito como trabalho pra ETEC.
-        Aqui dá pra ver os filmes cadastrados, e quem cria uma conta e
-        loga consegue cadastrar filme novo (título, capa, descrição e nota).
-      </p>
-      <p>
-        Feito com FastAPI + PostgreSQL no back-end e HTML/JS puro no front,
-        sem framework nenhum no front pra treinar o básico mesmo.
-      </p>
+    <section id="secao-dev-tools">
+      <div class="cabecalho-secao">
+        <h2>Dev Tools — Filmes</h2>
+        <button id="botao-add-filme-dev" class="botao-adicionar-dev">+ Novo filme</button>
+      </div>
+
+      <div id="lista-dev-filmes"></div>
     </section>
   </main>
 
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/dev-tools.js"></script>
 </body>
 </html>

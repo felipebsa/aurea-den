@@ -46,6 +46,10 @@
         <form id="form-cadastro">
           <input type="text" id="cadastro-usuario" placeholder="Usuário" required />
           <input type="password" id="cadastro-senha" placeholder="Senha" required />
+          <select id="cadastro-role">
+            <option value="CLIENT" selected>Cliente</option>
+            <option value="ADM">Administrador</option>
+          </select>
           <button type="submit">Cadastrar</button>
         </form>
         <p>Já tem conta? <a href="#" id="ir-para-login">Entrar</a></p>
@@ -60,11 +64,13 @@
       <button id="fechar-modal-detalhes">×</button>
       <img id="detalhes-capa" src="" alt="" />
       <div class="texto-detalhes">
+        <img id="detalhes-banner" class="escondido" src="" alt="Banner do filme" />
         <h2 id="detalhes-titulo"></h2>
         <p id="detalhes-nota"></p>
         <p id="detalhes-descricao"></p>
       </div>
     </div>
+  </div>
 
   <main>
     <section id="secao-lancamentos">

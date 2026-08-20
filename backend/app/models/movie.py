@@ -11,4 +11,5 @@ class Movie(Base):
     title = Column(String, nullable=False)
     description = Column(String, nullable=False)
     cover_url = Column(String, nullable=False)
+    banner_url = Column(String, nullable=True)  # imagem grande/destaque, além da capa (opcional)
     rating = Column(Float, nullable=False)

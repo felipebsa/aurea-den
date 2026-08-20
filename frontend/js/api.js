@@ -2,6 +2,15 @@
 // enquanto tô testando na minha máquina uso o localhost, depois troco pra URL do Railway
 const URL_API = "http://127.0.0.1:8000";
 
+// monta o header de autorização usando o token guardado no localStorage
+function cabecalhoAutorizado() {
+  const token = localStorage.getItem("token_aurea_den");
+  return {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+}
+
 // pega a lista de filmes lá do banco
 async function buscarFilmes() {
   const resposta = await fetch(`${URL_API}/movies/`);
@@ -11,16 +20,11 @@ async function buscarFilmes() {
   return resposta.json();
 }
 
-// manda um filme novo pra API (só funciona se tiver logado, por isso o token)
+// manda um filme novo pra API (só ADM consegue, por causa do token)
 async function cadastrarFilme(filme) {
-  const token = localStorage.getItem("token_aurea_den");
-
   const resposta = await fetch(`${URL_API}/movies/`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: cabecalhoAutorizado(),
     body: JSON.stringify(filme),
   });
 
@@ -32,12 +36,43 @@ async function cadastrarFilme(filme) {
   return resposta.json();
 }
 
-// cria a conta do usuário e já devolve o token de login
-async function registrarUsuario(nomeUsuario, senha) {
+// edita um filme que já existe (manda só os campos que mudaram)
+async function atualizarFilme(idFilme, dadosParciais) {
+  const resposta = await fetch(`${URL_API}/movies/${idFilme}`, {
+    method: "PUT",
+    headers: cabecalhoAutorizado(),
+    body: JSON.stringify(dadosParciais),
+  });
+
+  if (!resposta.ok) {
+    const erro = await resposta.json();
+    throw new Error(erro.detail || "Não deu pra editar o filme");
+  }
+
+  return resposta.json();
+}
+
+// apaga um filme (só ADM)
+async function apagarFilme(idFilme) {
+  const resposta = await fetch(`${URL_API}/movies/${idFilme}`, {
+    method: "DELETE",
+    headers: cabecalhoAutorizado(),
+  });
+
+  if (!resposta.ok) {
+    const erro = await resposta.json();
+    throw new Error(erro.detail || "Não deu pra apagar o filme");
+  }
+
+  return resposta.json();
+}
+
+// cria a conta do usuário (com a role escolhida no drop) e já devolve o token de login
+async function registrarUsuario(nomeUsuario, senha, role) {
   const resposta = await fetch(`${URL_API}/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username: nomeUsuario, password: senha }),
+    body: JSON.stringify({ username: nomeUsuario, password: senha, role: role }),
   });
 
   if (!resposta.ok) {

@@ -1,4 +1,5 @@
-// esse arquivo cuida do modal de login/cadastro que aparece em todas as páginas
+// esse arquivo cuida do modal de login/cadastro que aparece em todas as páginas,
+// e também da navbar (mostra "Dev Tools" quando quem tá logado é ADM)
 
 const modal = document.getElementById("modal-auth");
 const botaoConta = document.getElementById("botao-conta");
@@ -42,9 +43,10 @@ formLogin.addEventListener("submit", async (evento) => {
 
   try {
     const dados = await fazerLogin(usuario, senha);
-    // guardo o token no localStorage pra continuar logado quando trocar de página
+    // guardo o token e a role no localStorage pra continuar logado quando trocar de página
     localStorage.setItem("token_aurea_den", dados.access_token);
-    localStorage.setItem("usuario_aurea_den", usuario);
+    localStorage.setItem("usuario_aurea_den", dados.username);
+    localStorage.setItem("role_aurea_den", dados.role);
     location.reload();
   } catch (erro) {
     mensagemErro.textContent = erro.message;
@@ -55,12 +57,14 @@ formCadastro.addEventListener("submit", async (evento) => {
   evento.preventDefault();
   const usuario = document.getElementById("cadastro-usuario").value;
   const senha = document.getElementById("cadastro-senha").value;
+  const role = document.getElementById("cadastro-role").value; // ADM ou CLIENT, vem do drop
   const mensagemErro = document.getElementById("cadastro-erro");
 
   try {
-    const dados = await registrarUsuario(usuario, senha);
+    const dados = await registrarUsuario(usuario, senha, role);
     localStorage.setItem("token_aurea_den", dados.access_token);
-    localStorage.setItem("usuario_aurea_den", usuario);
+    localStorage.setItem("usuario_aurea_den", dados.username);
+    localStorage.setItem("role_aurea_den", dados.role);
     location.reload();
   } catch (erro) {
     mensagemErro.textContent = erro.message;
@@ -76,9 +80,37 @@ function atualizarBotaoConta() {
     botaoConta.onclick = () => {
       localStorage.removeItem("token_aurea_den");
       localStorage.removeItem("usuario_aurea_den");
+      localStorage.removeItem("role_aurea_den");
       location.reload();
     };
   }
 }
 
+// mostra o item "Dev Tools" na navbar só quando a role guardada é ADM
+function atualizarNavbar() {
+  const role = localStorage.getItem("role_aurea_den");
+  const listaNav = document.querySelector("header nav ul");
+  if (!listaNav) return;
+
+  // tira um "Dev Tools" que já possa ter sido injetado antes, pra não duplicar
+  const itemAntigo = document.getElementById("nav-item-dev-tools");
+  if (itemAntigo) itemAntigo.remove();
+
+  if (role !== "ADM") return;
+
+  const item = document.createElement("li");
+  item.id = "nav-item-dev-tools";
+
+  const link = document.createElement("a");
+  link.href = "dev-tools.html";
+  link.textContent = "Dev Tools";
+  if (location.pathname.endsWith("dev-tools.html")) {
+    link.classList.add("link-ativo");
+  }
+
+  item.appendChild(link);
+  listaNav.appendChild(item);
+}
+
 atualizarBotaoConta();
+atualizarNavbar();
