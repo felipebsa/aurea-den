@@ -9,19 +9,19 @@
 <body>
 
   <header>
-    <div class="logo">🦊 Áurea Den</div>
+    <div class="logo"><img src="img/logo-aurea-den.png" alt="Áurea Den" /></div>
     <nav>
       <ul>
         <li><a href="index.html">Início</a></li>
         <li><a href="lists.html">Listas</a></li>
         <li><a href="releases.html">Lançamentos</a></li>
         <li><a href="genres.html">Gênero</a></li>
-        <li><a href="about.html">Sobre</a></li>
+        <li><a href="credits.html">Créditos</a></li>
         <!-- o link "Dev Tools" com destaque ativo é injetado pelo js/auth.js -->
       </ul>
     </nav>
     <div class="acoes-header">
-      <button id="botao-conta">👤</button>
+      <button id="botao-conta">Conta</button>
     </div>
   </header>
 
@@ -68,6 +68,13 @@
         <input type="text" id="filme-dev-titulo" placeholder="Título" required />
         <input type="url" id="filme-dev-capa" placeholder="URL da capa" required />
         <input type="url" id="filme-dev-banner" placeholder="URL do banner (opcional)" />
+        <select id="filme-dev-genero">
+          <option value="acao">Ação</option>
+          <option value="drama">Drama</option>
+          <option value="ficcao">Ficção</option>
+          <option value="terror">Terror</option>
+          <option value="outros" selected>Outros</option>
+        </select>
         <textarea id="filme-dev-descricao" placeholder="Descrição" required></textarea>
         <input type="number" id="filme-dev-nota" placeholder="Nota (0 a 10)" min="0" max="10" step="0.1" required />
         <button type="submit" id="botao-salvar-filme-dev">Adicionar</button>
@@ -86,6 +93,20 @@
       <div id="lista-dev-filmes"></div>
     </section>
   </main>
+
+  <footer class="rodape-site">
+    <div class="rodape-conteudo">
+      <div class="rodape-marca">
+        <div class="logo"><img src="img/logo-aurea-den.png" alt="Áurea Den" /></div>
+        <p>Catálogo de filmes feito como trabalho de ETEC pela equipe Devs Den.</p>
+      </div>
+      <div class="rodape-links">
+        <a href="credits.html">Créditos</a>
+        <a href="https://github.com/etecvav26-1C2-03" target="_blank" rel="noopener noreferrer">GitHub da equipe</a>
+      </div>
+    </div>
+    <p class="rodape-copy">© 2026 Devs Den — Projeto acadêmico, ETEC.</p>
+  </footer>
 
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>

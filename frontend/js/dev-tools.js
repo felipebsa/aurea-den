@@ -37,7 +37,19 @@ async function carregarListaDev() {
   }
 }
 
-// monta uma linha da lista com capa pequena, título, nota e os botões de editar/apagar
+// traduz o valor salvo no banco (acao, drama, ficcao, terror, outros) pro rótulo em português
+function rotuloGenero(codigo) {
+  const rotulos = {
+    acao: "Ação",
+    drama: "Drama",
+    ficcao: "Ficção",
+    terror: "Terror",
+    outros: "Outros",
+  };
+  return rotulos[codigo] || "Outros";
+}
+
+// monta uma linha da lista com capa pequena, título, nota, gênero e os botões de editar/apagar
 function montarLinhaFilmeDev(filme) {
   const linha = document.createElement("div");
   linha.className = "linha-filme-dev";
@@ -46,11 +58,11 @@ function montarLinhaFilmeDev(filme) {
     <img src="${filme.cover_url}" alt="Capa de ${filme.title}" />
     <div class="info-linha-dev">
       <p class="titulo-linha-dev">${filme.title}</p>
-      <p class="nota-linha-dev">⭐ ${filme.rating}</p>
+      <p class="nota-linha-dev">Nota ${filme.rating} · ${rotuloGenero(filme.genre)}</p>
     </div>
     <div class="acoes-linha-dev">
-      <button class="botao-editar-dev" title="Editar filme">✎</button>
-      <button class="botao-excluir-dev" title="Apagar filme">🗑</button>
+      <button class="botao-editar-dev" title="Editar filme">Editar</button>
+      <button class="botao-excluir-dev" title="Apagar filme">Apagar</button>
     </div>
   `;
 
@@ -103,6 +115,7 @@ function cuidarModalFilmeDev() {
       title: document.getElementById("filme-dev-titulo").value,
       cover_url: document.getElementById("filme-dev-capa").value,
       banner_url: bannerDigitado ? bannerDigitado : null,
+      genre: document.getElementById("filme-dev-genero").value,
       description: document.getElementById("filme-dev-descricao").value,
       rating: parseFloat(document.getElementById("filme-dev-nota").value),
     };
@@ -131,6 +144,7 @@ function abrirModalFilmeDev(filme) {
   document.getElementById("filme-dev-titulo").value = filme ? filme.title : "";
   document.getElementById("filme-dev-capa").value = filme ? filme.cover_url : "";
   document.getElementById("filme-dev-banner").value = filme && filme.banner_url ? filme.banner_url : "";
+  document.getElementById("filme-dev-genero").value = filme && filme.genre ? filme.genre : "outros";
   document.getElementById("filme-dev-descricao").value = filme ? filme.description : "";
   document.getElementById("filme-dev-nota").value = filme ? filme.rating : "";
 

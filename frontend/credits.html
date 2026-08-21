@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Áurea Den - Créditos</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="logo"><img src="img/logo-aurea-den.png" alt="Áurea Den" /></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="lists.html">Listas</a></li>
+        <li><a href="releases.html">Lançamentos</a></li>
+        <li><a href="genres.html">Gênero</a></li>
+        <li><a href="credits.html" class="link-ativo">Créditos</a></li>
+      </ul>
+    </nav>
+    <div class="acoes-header">
+      <input type="text" id="campo-busca" placeholder="Buscar filmes..." />
+      <button id="botao-conta">Conta</button>
+    </div>
+  </header>
+
+  <!-- modal de login/cadastro -->
+  <div id="modal-auth" class="escondido">
+    <div class="caixa-modal">
+      <button id="fechar-modal">×</button>
+
+      <div id="area-login">
+        <h2>Entrar</h2>
+        <form id="form-login">
+          <input type="text" id="login-usuario" placeholder="Usuário" required />
+          <input type="password" id="login-senha" placeholder="Senha" required />
+          <button type="submit">Entrar</button>
+        </form>
+        <p>Não tem conta? <a href="#" id="ir-para-cadastro">Cadastre-se</a></p>
+        <p id="login-erro" class="erro"></p>
+      </div>
+
+      <div id="area-cadastro" class="escondido">
+        <h2>Criar conta</h2>
+        <form id="form-cadastro">
+          <input type="text" id="cadastro-usuario" placeholder="Usuário" required />
+          <input type="password" id="cadastro-senha" placeholder="Senha" required />
+          <select id="cadastro-role">
+            <option value="CLIENT" selected>Cliente</option>
+            <option value="ADM">Administrador</option>
+          </select>
+          <button type="submit">Cadastrar</button>
+        </form>
+        <p>Já tem conta? <a href="#" id="ir-para-login">Entrar</a></p>
+        <p id="cadastro-erro" class="erro"></p>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section id="secao-creditos">
+      <div class="cabecalho-secao">
+        <h2>Créditos</h2>
+      </div>
+
+      <p class="creditos-intro">
+        O Áurea Den nasceu como trabalho da turma de Desenvolvimento de Sistemas da ETEC — a
+        equipe se chama <strong>Devs Den</strong> e construiu o catálogo inteiro do zero:
+        API em FastAPI, banco em PostgreSQL e todo o front em HTML, CSS e JS puro, sem
+        framework nenhum, só pra provar que dá pra fazer bonito sem atalho.
+      </p>
+
+      <div id="grade-creditos">
+
+        <article class="card-credito">
+          <div class="avatar-credito"><img src="img/creditos/felipe.png" alt="Foto de Felipe Barbosa Santos" /></div>
+          <h3>Felipe Barbosa Santos</h3>
+          <p class="funcao-credito">Back-end &amp; Líder do projeto</p>
+          <p class="descricao-credito">
+            O cérebro por trás da API: modelou o banco, montou a autenticação com JWT, criou
+            o sistema de permissões ADM/CLIENT e ficou de olho em cada rota pra nada quebrar.
+            Também foi quem juntou o time, distribuiu as tarefas e garantiu que o projeto saísse
+            do papel e chegasse inteiro na entrega.
+          </p>
+          <a href="https://github.com/felipebsa" target="_blank" rel="noopener noreferrer" class="link-github-credito">GitHub: github.com/felipebsa</a>
+        </article>
+
+        <article class="card-credito">
+          <div class="avatar-credito"><img src="img/creditos/guilherme.png" alt="Foto de Guilherme Miguel Rodrigues Pereira Lakonski" /></div>
+          <h3>Guilherme Miguel Rodrigues Pereira Lakonski</h3>
+          <p class="funcao-credito">Rodapé &amp; Seção de créditos</p>
+          <p class="descricao-credito">
+            Responsável pelo rodapé que acompanha o site inteiro e por essa própria página —
+            o guardião oficial de créditos do Áurea Den, garantindo que ninguém do time saia
+            sem o devido reconhecimento.
+          </p>
+          <a href="https://github.com/LAKONSKI" target="_blank" rel="noopener noreferrer" class="link-github-credito">GitHub: github.com/LAKONSKI</a>
+        </article>
+
+        <article class="card-credito">
+          <div class="avatar-credito"><img src="img/creditos/richard.png" alt="Foto de Richard Murilo Araújo Freire" /></div>
+          <h3>Richard Murilo Araújo Freire</h3>
+          <p class="funcao-credito">Navbar &amp; Header</p>
+          <p class="descricao-credito">
+            Construiu a navbar e boa parte do cabeçalho: o menu fixo no topo, a barra de busca
+            e a área de conta que acompanham a pessoa em toda página do site.
+          </p>
+          <a href="https://github.com/richard426278" target="_blank" rel="noopener noreferrer" class="link-github-credito">GitHub: github.com/richard426278</a>
+        </article>
+
+        <article class="card-credito">
+          <div class="avatar-credito"><img src="img/creditos/gabriel.png" alt="Foto de Gabriel Fernandes Barbarini" /></div>
+          <h3>Gabriel Fernandes Barbarini</h3>
+          <p class="funcao-credito">CSS</p>
+          <p class="descricao-credito">
+            O responsável pela cara do Áurea Den: a paleta roxo e dourado, a tipografia estilo
+            cartaz de cinema e os detalhes visuais que fazem o site parecer um serviço de
+            streaming de verdade.
+          </p>
+          <a href="https://github.com/FeLaLost" target="_blank" rel="noopener noreferrer" class="link-github-credito">GitHub: github.com/FeLaLost</a>
+        </article>
+
+        <article class="card-credito">
+          <div class="avatar-credito"><img src="img/creditos/caua.png" alt="Foto de Cauã" /></div>
+          <h3>Cauã</h3>
+          <p class="funcao-credito">Testes</p>
+          <p class="descricao-credito">
+            O caçador de bug oficial do time — testou login, cadastro, permissões e navegação
+            pra pegar os problemas antes que eles chegassem na entrega final.
+          </p>
+          <a href="https://github.com/CauanSouzaa" target="_blank" rel="noopener noreferrer" class="link-github-credito">GitHub: github.com/CauanSouzaa</a>
+        </article>
+
+        <article class="card-credito">
+          <div class="avatar-credito"><img src="img/creditos/eduardo.png" alt="Foto de Eduardo" /></div>
+          <h3>Eduardo</h3>
+          <p class="funcao-credito">Conteúdo — cadastro de filmes</p>
+          <p class="descricao-credito">
+            Encarregado de popular o catálogo: cadastrar os filmes, capas, banners e sinopses
+            que dão vida à grade e ao carrossel de destaque do site.
+          </p>
+          <a href="https://github.com/Eduardo-Bargueiras" target="_blank" rel="noopener noreferrer" class="link-github-credito">GitHub: github.com/Eduardo-Bargueiras</a>
+        </article>
+
+      </div>
+
+      <p class="creditos-rodape-texto">
+        Tem mais gente ajudando que ainda não mandou as informações — assim que chegar, entra
+        aqui também. Enquanto isso, dá uma olhada no
+        <a href="https://github.com/etecvav26-1C2-03" target="_blank" rel="noopener noreferrer">GitHub da Devs Den</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer class="rodape-site">
+    <div class="rodape-conteudo">
+      <div class="rodape-marca">
+        <div class="logo"><img src="img/logo-aurea-den.png" alt="Áurea Den" /></div>
+        <p>Catálogo de filmes feito como trabalho de ETEC pela equipe Devs Den.</p>
+      </div>
+      <div class="rodape-links">
+        <a href="credits.html">Créditos</a>
+        <a href="https://github.com/etecvav26-1C2-03" target="_blank" rel="noopener noreferrer">GitHub da equipe</a>
+      </div>
+    </div>
+    <p class="rodape-copy">© 2026 Devs Den — Projeto acadêmico, ETEC.</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

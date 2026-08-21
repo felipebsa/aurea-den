@@ -7,11 +7,11 @@ function montarCardFilme(filme) {
   card.innerHTML = `
     <div class="capa-card">
       <img src="${filme.cover_url}" alt="Capa do filme ${filme.title}" />
-      <button class="botao-play" aria-label="Ver detalhes de ${filme.title}">▶</button>
+      <button class="botao-play" aria-label="Ver detalhes de ${filme.title}"></button>
     </div>
     <div class="info-card">
       <p class="titulo-card">${filme.title}</p>
-      <p class="nota-card">⭐ ${filme.rating}</p>
+      <p class="nota-card">Nota ${filme.rating}</p>
     </div>
   `;
 
@@ -40,7 +40,7 @@ async function renderizarGradeFilmes(elementoGrade) {
   }
 }
 
-// abre o modal com os detalhes do filme (nem toda página tem esse modal, tipo a "sobre")
+// abre o modal com os detalhes do filme (nem toda página tem esse modal, tipo a de créditos)
 function abrirDetalhesFilme(filme) {
   const modal = document.getElementById("modal-detalhes");
   if (!modal) return;
@@ -48,19 +48,8 @@ function abrirDetalhesFilme(filme) {
   document.getElementById("detalhes-capa").src = filme.cover_url;
   document.getElementById("detalhes-capa").alt = `Capa do filme ${filme.title}`;
   document.getElementById("detalhes-titulo").textContent = filme.title;
-  document.getElementById("detalhes-nota").textContent = `⭐ ${filme.rating}`;
+  document.getElementById("detalhes-nota").textContent = `Nota ${filme.rating}`;
   document.getElementById("detalhes-descricao").textContent = filme.description;
-
-  // o banner é opcional, só mostra a imagem se o filme tiver um cadastrado
-  const banner = document.getElementById("detalhes-banner");
-  if (banner) {
-    if (filme.banner_url) {
-      banner.src = filme.banner_url;
-      banner.classList.remove("escondido");
-    } else {
-      banner.classList.add("escondido");
-    }
-  }
 
   modal.classList.remove("escondido");
 }

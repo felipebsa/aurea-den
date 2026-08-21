@@ -9,19 +9,19 @@
 <body>
 
   <header>
-    <div class="logo">🦊 Áurea Den</div>
+    <div class="logo"><img src="img/logo-aurea-den.png" alt="Áurea Den" /></div>
     <nav>
       <ul>
         <li><a href="index.html">Início</a></li>
         <li><a href="lists.html">Listas</a></li>
         <li><a href="releases.html">Lançamentos</a></li>
         <li><a href="genres.html" class="link-ativo">Gênero</a></li>
-        <li><a href="about.html">Sobre</a></li>
+        <li><a href="credits.html">Créditos</a></li>
       </ul>
     </nav>
     <div class="acoes-header">
       <input type="text" id="campo-busca" placeholder="Buscar filmes..." />
-      <button id="botao-conta">👤</button>
+      <button id="botao-conta">Conta</button>
     </div>
   </header>
 
@@ -64,7 +64,6 @@
       <button id="fechar-modal-detalhes">×</button>
       <img id="detalhes-capa" src="" alt="" />
       <div class="texto-detalhes">
-        <img id="detalhes-banner" class="escondido" src="" alt="Banner do filme" />
         <h2 id="detalhes-titulo"></h2>
         <p id="detalhes-nota"></p>
         <p id="detalhes-descricao"></p>
@@ -78,21 +77,33 @@
         <h2>Filtrar por gênero</h2>
       </div>
 
-      <!--
-        mesma coisa aqui: o model Movie ainda não tem campo de gênero.
-        deixei os botões de filtro só de exemplo (não fazem nada ainda),
-        pra quando eu adicionar esse campo no banco fica fácil de ligar.
-      -->
+      <!-- filtro de gênero de verdade agora: o Movie já tem o campo "genre" no banco -->
       <div id="filtros-genero">
+        <button class="botao-genero botao-genero-ativo" data-genero="todos">Todos</button>
         <button class="botao-genero" data-genero="acao">Ação</button>
         <button class="botao-genero" data-genero="drama">Drama</button>
         <button class="botao-genero" data-genero="ficcao">Ficção</button>
         <button class="botao-genero" data-genero="terror">Terror</button>
+        <button class="botao-genero" data-genero="outros">Outros</button>
       </div>
 
       <div id="grade-filmes"></div>
     </section>
   </main>
+
+  <footer class="rodape-site">
+    <div class="rodape-conteudo">
+      <div class="rodape-marca">
+        <div class="logo"><img src="img/logo-aurea-den.png" alt="Áurea Den" /></div>
+        <p>Catálogo de filmes feito como trabalho de ETEC pela equipe Devs Den.</p>
+      </div>
+      <div class="rodape-links">
+        <a href="credits.html">Créditos</a>
+        <a href="https://github.com/etecvav26-1C2-03" target="_blank" rel="noopener noreferrer">GitHub da equipe</a>
+      </div>
+    </div>
+    <p class="rodape-copy">© 2026 Devs Den — Projeto acadêmico, ETEC.</p>
+  </footer>
 
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>

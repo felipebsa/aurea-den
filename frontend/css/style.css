@@ -63,6 +63,12 @@ header {
   white-space: nowrap;
 }
 
+.logo img {
+  display: block;
+  height: 40px;
+  width: auto;
+}
+
 header nav ul {
   display: flex;
   gap: 32px;
@@ -117,15 +123,17 @@ header nav a.link-ativo {
   border-color: var(--dourado);
 }
 
-#botao-conta,
-#botao-add-filme {
-  width: 40px;
+#botao-conta {
+  min-width: 40px;
   height: 40px;
-  border-radius: 50%;
+  padding: 0 16px;
+  border-radius: 999px;
   border: 1px solid var(--borda);
   background: var(--bg-painel-claro);
   color: var(--dourado);
-  font-size: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -133,8 +141,7 @@ header nav a.link-ativo {
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
-#botao-conta:hover,
-#botao-add-filme:hover {
+#botao-conta:hover {
   background: var(--dourado);
   color: var(--bg-fundo);
   border-color: var(--dourado);
@@ -334,9 +341,21 @@ main {
   border-radius: 50%;
   border: none;
   background: var(--dourado);
-  color: #2b1600;
-  font-size: 13px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* triângulo de play desenhado com borda, sem depender de emoji/caractere */
+.botao-play::before {
+  content: "";
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  border-style: solid;
+  border-width: 6px 0 6px 10px;
+  border-color: transparent transparent transparent #2b1600;
 }
 
 .info-card {
@@ -388,6 +407,12 @@ main {
 .botao-genero:hover {
   color: var(--dourado);
   border-color: var(--dourado);
+}
+
+.botao-genero-ativo {
+  color: var(--dourado);
+  border-color: var(--dourado);
+  background: rgba(240, 168, 60, 0.12);
 }
 
 /* ---------- modais (login/cadastro, cadastrar filme, detalhes) ---------- */
@@ -562,15 +587,6 @@ main {
   }
 }
 
-/* banner opcional dentro do modal de detalhes, só aparece se o filme tiver um */
-#detalhes-banner {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 14px;
-  object-fit: cover;
-  max-height: 160px;
-}
-
 /* ---------- Dev Tools (área exclusiva de ADM) ---------- */
 
 .botao-adicionar-dev {
@@ -647,14 +663,14 @@ main {
 }
 
 .acoes-linha-dev button {
-  width: 34px;
-  height: 34px;
+  padding: 8px 14px;
   border-radius: 8px;
   border: 1px solid var(--borda);
   background: var(--bg-painel-claro);
   color: var(--texto);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 600;
   transition: border-color 0.15s ease, color 0.15s ease;
 }
 
@@ -666,4 +682,155 @@ main {
 .botao-excluir-dev:hover {
   border-color: #ff8080 !important;
   color: #ff8080 !important;
+}
+
+/* ---------- rodapé (aparece em toda página) ---------- */
+
+.rodape-site {
+  border-top: 1px solid var(--borda);
+  background: var(--bg-painel);
+  padding: 32px 48px 20px;
+  margin-top: 40px;
+}
+
+.rodape-conteudo {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.rodape-marca .logo {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.rodape-marca p {
+  color: var(--texto-fraco);
+  font-size: 13px;
+  max-width: 320px;
+  margin: 0;
+}
+
+.rodape-links {
+  display: flex;
+  gap: 24px;
+}
+
+.rodape-links a {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto-fraco);
+  transition: color 0.15s ease;
+}
+
+.rodape-links a:hover {
+  color: var(--dourado);
+}
+
+.rodape-copy {
+  max-width: 1400px;
+  margin: 24px auto 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--borda);
+  text-align: center;
+  font-size: 12px;
+  color: var(--texto-fraco);
+}
+
+/* ---------- página de créditos ---------- */
+
+.creditos-intro {
+  color: var(--texto-fraco);
+  max-width: 720px;
+  font-size: 15px;
+  margin-bottom: 28px;
+}
+
+#grade-creditos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card-credito {
+  background: var(--bg-painel);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 22px 20px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.card-credito:hover {
+  border-color: var(--dourado);
+  transform: translateY(-4px);
+}
+
+.avatar-credito {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--borda);
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.avatar-credito img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-credito h3 {
+  font-family: var(--fonte-titulo);
+  color: var(--texto);
+  font-size: 17px;
+  margin: 0 0 4px;
+}
+
+.funcao-credito {
+  color: var(--dourado);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+
+.descricao-credito {
+  color: var(--texto-fraco);
+  font-size: 14px;
+  margin: 0 0 14px;
+}
+
+.link-github-credito {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto);
+  background: var(--bg-painel-claro);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 7px 14px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.link-github-credito:hover {
+  border-color: var(--dourado);
+  color: var(--dourado);
+}
+
+.creditos-rodape-texto {
+  color: var(--texto-fraco);
+  font-size: 14px;
+  margin-top: 28px;
+}
+
+.creditos-rodape-texto a {
+  color: var(--dourado);
+  font-weight: 600;
 }
