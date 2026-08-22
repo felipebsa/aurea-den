@@ -1,6 +1,6 @@
 // aqui fica o endereço da nossa API (o backend em FastAPI)
 // enquanto tô testando na minha máquina uso o localhost, depois troco pra URL do Railway
-const URL_API = "aurea-den-production.up.railway.app";
+const URL_API = "https://aurea-den-production.up.railway.app";
 
 // monta o header de autorização usando o token guardado no localStorage
 function cabecalhoAutorizado() {
