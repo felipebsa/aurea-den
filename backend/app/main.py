@@ -12,7 +12,7 @@ app = FastAPI(title="Áurea Den - API")
 # libera o front-end (que vai estar hospedado em outro lugar, tipo o Netlify) a acessar a API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://aurea-den.netlify.app"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
