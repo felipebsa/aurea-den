@@ -1,0 +1,17 @@
+.env
+backend/.env
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+env/
+*.db
+*.sqlite3
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+node_modules/
