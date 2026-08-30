@@ -5,11 +5,17 @@ from sqlalchemy.orm import Session
 
 from app.core.security import require_admin
 from app.database import get_db
-from app.models.movie import Movie
+from app.models.movie import Movie, MovieGenre, MovieGenreEntry
 from app.models.user import User
 from app.schemas.movie import MovieCreate, MovieResponse, MovieUpdate
 
 router = APIRouter(prefix="/movies", tags=["Filmes"])
+
+
+def montar_entradas_de_genero(generos: List[MovieGenre]) -> List[MovieGenreEntry]:
+    # transforma a lista de valores (ex: [MovieGenre.ACAO, MovieGenre.COMEDIA])
+    # numa lista de linhas prontas pra salvar na tabela movie_genres
+    return [MovieGenreEntry(genre=genero) for genero in generos]
 
 
 @router.post("/", response_model=MovieResponse)
@@ -18,7 +24,10 @@ def create_movie(
     db: Session = Depends(get_db),
     current_user: User = Depends(require_admin),  # só ADM cria filme
 ):
-    new_movie = Movie(**data.model_dump())
+    dados = data.model_dump(exclude={"genres"})
+    new_movie = Movie(**dados)
+    new_movie.genre_entries = montar_entradas_de_genero(data.genres)
+
     db.add(new_movie)
     db.commit()
     db.refresh(new_movie)
@@ -51,8 +60,16 @@ def update_movie(
         raise HTTPException(status_code=404, detail="Não achei nenhum filme com esse id")
 
     # exclude_unset garante que só mexe nos campos que vieram no corpo da requisição
-    for field, value in data.model_dump(exclude_unset=True).items():
+    dados = data.model_dump(exclude_unset=True, exclude={"genres"})
+    for field, value in dados.items():
         setattr(movie, field, value)
+
+    # genres é tratado separado: só mexe se a chave "genres" veio na requisição.
+    # Trocar a lista inteira (em vez de editar item a item) faz o SQLAlchemy
+    # apagar as linhas antigas e criar as novas sozinho, por causa do
+    # cascade="all, delete-orphan" lá no relationship do model
+    if data.genres is not None:
+        movie.genre_entries = montar_entradas_de_genero(data.genres)
 
     db.commit()
     db.refresh(movie)
