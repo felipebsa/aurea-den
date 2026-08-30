@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Áurea Den - Lançamentos</title>
   <link rel="stylesheet" href="css/style.css" />
+  <script>
+    (function () {
+      if (localStorage.getItem("tema_aurea_den") === "claro") {
+        document.documentElement.setAttribute("data-tema", "claro");
+      }
+    })();
+  </script>
 </head>
 <body>
 
@@ -21,6 +28,7 @@
     </nav>
     <div class="acoes-header">
       <input type="text" id="campo-busca" placeholder="Buscar filmes..." />
+      <button id="botao-tema" title="Alternar tema claro/escuro" aria-label="Alternar tema claro/escuro"></button>
       <button id="botao-conta">Conta</button>
     </div>
   </header>
@@ -83,6 +91,10 @@
         (os mais novos ficam por último). dava pra melhorar isso depois
         adicionando uma coluna de data no model Movie.
       -->
+      <div class="linha-filtros-topo linha-filtros-topo-fim">
+        <button id="botao-ordenar-nota" class="botao-ordenar-icone" type="button" data-ordem="nenhuma"></button>
+      </div>
+
       <div id="grade-filmes"></div>
     </section>
   </main>
@@ -101,9 +113,12 @@
     <p class="rodape-copy">© 2026 Devs Den — Projeto acadêmico, ETEC.</p>
   </footer>
 
+  <script src="js/tema.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/render-movies.js"></script>
+  <script src="js/busca.js"></script>
+  <script src="js/ordenacao.js"></script>
   <script src="js/releases.js"></script>
 </body>
 </html>

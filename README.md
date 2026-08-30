@@ -5,9 +5,9 @@ Catálogo de filmes feito como trabalho de ETEC pela equipe **Devs Den**.
 ## Sobre o projeto
 
 Site de catálogo de filmes com sistema de contas (cliente comum e administrador),
-painel de administração pra cadastrar/editar/apagar filme, filtro por gênero,
-carrossel de destaque com os filmes mais bem avaliados, e página de créditos
-da equipe.
+painel de administração pra cadastrar/editar/apagar filme, busca por nome,
+filtro por gênero (múltiplo) e ordenação por nota, carrossel de destaque com
+os filmes mais bem avaliados, tema claro/escuro e página de créditos da equipe.
 
 ## Funcionalidades
 
@@ -15,7 +15,15 @@ da equipe.
   contas ADM cadastradas ao mesmo tempo)
 - Painel **Dev Tools** (só pra ADM) — CRUD completo de filme: criar, editar
   e apagar, tudo por modal
-- Filtro por gênero (Ação, Drama, Ficção, Terror, Outros)
+- Cada filme pode ter **vários gêneros ao mesmo tempo** (Ação, Drama, Ficção,
+  Terror, Comédia, Aventura, Espadachim, Romance, Melhor amigo, Anime,
+  Outros), marcados por checkbox no cadastro
+- Filtro por gênero **multi-select** — dá pra combinar mais de um gênero de
+  uma vez, e o botão "Todos" limpa a seleção
+- Busca por nome em tempo real, filtrando os filmes que já estão na tela
+- Ordenação por nota com um botão só, que cicla entre padrão / menor→maior /
+  maior→menor a cada clique
+- Tema claro/escuro, alternado por um botão no header e salvo entre visitas
 - Carrossel de destaque na home com os 5 filmes de maior nota, com autoplay
   e navegação manual (setas + bolinhas)
 - Modal de detalhes do filme
@@ -47,7 +55,8 @@ frontend/
   dev-tools.html
   css/style.css
   js/     (api.js, auth.js, home.js, render-movies.js, genres.js,
-            dev-tools.js, lists.js, releases.js)
+            busca.js, ordenacao.js, tema.js, dev-tools.js, lists.js,
+            releases.js)
   img/    (logo, fotos da página de créditos)
 ```
 
@@ -56,7 +65,26 @@ frontend/
 - **Back-end**: FastAPI, SQLAlchemy, PostgreSQL, JWT (python-jose), hash de
   senha com bcrypt (via passlib)
 - **Front-end**: HTML + CSS + JavaScript puro, sem framework nenhum;
-  `localStorage` guarda a sessão (token, usuário e role) entre as páginas
+  `localStorage` guarda a sessão (token, usuário e role) e a preferência de
+  tema entre as páginas
+
+## Como o gênero múltiplo funciona por baixo dos panos
+
+`MovieGenre` é um enum fixo (os valores possíveis de gênero) e cada filme tem
+uma lista deles, guardada numa tabelinha à parte (`movie_genres`, ligando
+`movie_id` a um valor do enum) — não é um campo só no filme, porque um filme
+pode ter vários gêneros ao mesmo tempo. Pra adicionar um gênero novo na
+lista, os lugares que precisam mudar são:
+
+1. `backend/app/models/movie.py` — adiciona o valor no enum `MovieGenre`
+2. `frontend/js/dev-tools.js` — adiciona o rótulo em português na função
+   `rotuloGenero`
+3. `frontend/dev-tools.html` — adiciona o checkbox no formulário de cadastro
+4. `frontend/genres.html` — adiciona o botão de filtro na página de Gênero
+
+Não precisa mexer em `schemas/movie.py` nem em `routers/movies.py`: eles já
+trabalham com "lista de gêneros" de forma genérica, sem saber quais valores
+existem.
 
 ## Rodando o backend local
 
@@ -85,11 +113,14 @@ depois de subir o backend no Railway, troca essa URL lá.
 ## Banco de dados
 
 As tabelas são criadas automaticamente na primeira subida
-(`Base.metadata.create_all`). Se você já tinha um banco criado *antes* dos
-campos `role`, `genre` e `banner_url` existirem, vai precisar apagar as
-tabelas (e os tipos enum, se for Postgres) pra elas serem recriadas certas:
+(`Base.metadata.create_all`) — inclusive `movie_genres`, já que é uma tabela
+nova, não precisa de migration nenhuma pra ela aparecer. Se você já tinha um
+banco criado *antes* dos campos `role` e `banner_url` existirem (ou antes do
+gênero virar lista), vai precisar apagar as tabelas (e os tipos enum, se for
+Postgres) pra elas serem recriadas certas:
 
 ```sql
+DROP TABLE IF EXISTS movie_genres;
 DROP TABLE IF EXISTS movies;
 DROP TABLE IF EXISTS users;
 DROP TYPE IF EXISTS user_role;

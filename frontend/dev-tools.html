@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Áurea Den - Dev Tools</title>
   <link rel="stylesheet" href="css/style.css" />
+  <script>
+    (function () {
+      if (localStorage.getItem("tema_aurea_den") === "claro") {
+        document.documentElement.setAttribute("data-tema", "claro");
+      }
+    })();
+  </script>
 </head>
 <body>
 
@@ -21,6 +28,7 @@
       </ul>
     </nav>
     <div class="acoes-header">
+      <button id="botao-tema" title="Alternar tema claro/escuro" aria-label="Alternar tema claro/escuro"></button>
       <button id="botao-conta">Conta</button>
     </div>
   </header>
@@ -68,15 +76,25 @@
         <input type="text" id="filme-dev-titulo" placeholder="Título" required />
         <input type="url" id="filme-dev-capa" placeholder="URL da capa" required />
         <input type="url" id="filme-dev-banner" placeholder="URL do banner (opcional)" />
-        <select id="filme-dev-genero">
-          <option value="acao">Ação</option>
-          <option value="drama">Drama</option>
-          <option value="ficcao">Ficção</option>
-          <option value="terror">Terror</option>
-          <option value="outros" selected>Outros</option>
-        </select>
         <textarea id="filme-dev-descricao" placeholder="Descrição" required></textarea>
         <input type="number" id="filme-dev-nota" placeholder="Nota (0 a 10)" min="0" max="10" step="0.1" required />
+
+        <div class="campo-generos-dev">
+          <label>Gêneros (marque um ou mais)</label>
+          <div id="filme-dev-generos-caixas" class="grade-checkbox-tags">
+            <label class="checkbox-tag"><input type="checkbox" value="acao" /> <span>Ação</span></label>
+            <label class="checkbox-tag"><input type="checkbox" value="drama" /> <span>Drama</span></label>
+            <label class="checkbox-tag"><input type="checkbox" value="ficcao" /> <span>Ficção</span></label>
+            <label class="checkbox-tag"><input type="checkbox" value="terror" /> <span>Terror</span></label>
+            <label class="checkbox-tag"><input type="checkbox" value="comedia" /> <span>Comédia</span></label>
+            <label class="checkbox-tag"><input type="checkbox" value="aventura" /> <span>Aventura</span></label>
+            <label class="checkbox-tag"><input type="checkbox" value="espadachim" /> <span>Espadachim</span></label>
+            <label class="checkbox-tag"><input type="checkbox" value="romance" /> <span>Romance</span></label>
+            <label class="checkbox-tag"><input type="checkbox" value="melhor_amigo" /> <span>Melhor amigo</span></label>
+            <label class="checkbox-tag"><input type="checkbox" value="outros" /> <span>Outros</span></label>
+          </div>
+        </div>
+
         <button type="submit" id="botao-salvar-filme-dev">Adicionar</button>
       </form>
       <p id="form-filme-dev-erro" class="erro"></p>
@@ -108,6 +126,7 @@
     <p class="rodape-copy">© 2026 Devs Den — Projeto acadêmico, ETEC.</p>
   </footer>
 
+  <script src="js/tema.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/dev-tools.js"></script>
